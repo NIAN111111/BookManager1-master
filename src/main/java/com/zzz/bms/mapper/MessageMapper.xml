@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zzz.bms.mapper.MessageMapper">
+
+  <!-- 添加留言：id由数据库自增，无需手动插入 -->
+  <insert id="addMessage" parameterType="com.zzz.bms.entity.Message">
+    INSERT INTO message (userId, userName, content)
+    VALUES (#{userId}, #{userName}, #{content})
+  </insert>
+
+  <!-- 查询留言：包含新增的id字段 -->
+  <select id="getAllMessages" resultType="com.zzz.bms.entity.Message">
+    SELECT id, userId, userName, content, create_time AS createTime
+    FROM message
+    ORDER BY create_time DESC
+  </select>
+
+</mapper>
